@@ -15,7 +15,7 @@ function PostDetail() {
 	const [post, setPost] = useState(null);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:5000/api/posts/${slug}`)
+		fetch(`https://broken-quill-backend.onrender.com/api/posts/${slug}`)
 			.then((res) => res.json())
 			.then((data) => setPost(data));
 	}, [slug]);

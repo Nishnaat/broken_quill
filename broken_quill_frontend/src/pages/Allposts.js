@@ -5,7 +5,7 @@ function AllPosts() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		fetch('http://127.0.0.1:5000/api/posts')
+		fetch('http://broken-quill-backend.onrender.com/api/posts')
 			.then((res) => res.json())
 			.then((data) => setPosts(data))
 			.catch((err) => console.error(err));
