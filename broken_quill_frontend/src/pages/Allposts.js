@@ -5,7 +5,7 @@ function AllPosts() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		fetch('https://broken-quill-backend.onrender.com/api/posts')
+		fetch(`${process.env.REACT_APP_API_URL}/api/posts/${slug}`)
 			.then((res) => res.json())
 			.then((data) => setPosts(data))
 			.catch((err) => console.error(err));
