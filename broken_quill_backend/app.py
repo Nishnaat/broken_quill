@@ -5,7 +5,8 @@ import os
 from utils import load_post_list, load_post_content
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://https://broken-quillfrontend.vercel.app/"])
+
 
 @app.route('/api/posts', methods=['GET'])
 def get_posts():
