@@ -5,7 +5,7 @@ function Categories() {
 	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
-		fetch('broken-quill-backend.onrender.com/api/posts')
+		fetch('https://broken-quill-backend.onrender.com/api/posts')
 			.then((res) => res.json())
 			.then((data) => {
 				// Extract unique categories

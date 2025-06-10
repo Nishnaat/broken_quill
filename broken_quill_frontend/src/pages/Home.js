@@ -7,7 +7,7 @@ function Home({ darkMode }) {
 	const [featured, setFeatured] = useState(null);
 
 	useEffect(() => {
-		axios.get('http://broken-quill-backend.onrender.com/api/posts')
+		axios.get('https://broken-quill-backend.onrender.com/api/posts')
 			.then(res => {
 				setPosts(res.data);
 
