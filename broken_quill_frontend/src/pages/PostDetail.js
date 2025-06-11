@@ -29,6 +29,7 @@ function PostDetail() {
 			<Helmet>
 				<title>{post.title} | My Blog</title>
 				<meta name="description" content={post.excerpt || 'Check out this post on My Blog'} />
+				<meta name="keywords" content={`${post.title}, blog, writing, shayari, shayri, poem`} />
 				<meta property="og:title" content={post.title} />
 				<meta property="og:description" content={post.excerpt || 'Check out this post on My Blog'} />
 				<meta property="og:type" content="article" />
