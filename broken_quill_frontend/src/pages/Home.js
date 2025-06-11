@@ -7,7 +7,7 @@ function Home({ darkMode }) {
 	const [featured, setFeatured] = useState(null);
 
 	useEffect(() => {
-		axios.get('${process.env.REACT_APP_API_URL}/api/posts')
+		axios.get(`${process.env.REACT_APP_API_URL}/api/posts`)
 			.then(res => {
 				setPosts(res.data);
 
