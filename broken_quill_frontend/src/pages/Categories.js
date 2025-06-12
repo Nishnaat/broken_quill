@@ -103,23 +103,23 @@ function Categories({ darkMode }) {
 					filteredPosts.map(post => (
 						<li
 							key={post.slug}
-							className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-light' : ''}`}
+							className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-white' : ''}`}
 						>
 							<Link
 								to={`/posts/${post.slug}`}
-								className={`text-decoration-none ${darkMode ? 'text-light' : 'text-dark'}`}
+								className={`text-decoration-none ${darkMode ? 'text-white' : 'text-dark'}`}
 							>
 								{post.title}
 							</Link>
 						</li>
 					))
 				) : (
-					<li className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-light' : ''}`}>
+					
+					<li className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-white' : ''}`}>
 						No posts found for selected filters.
 					</li>
 				)}
 			</ul>
-			console.log("darkMode in Categories:", darkMode);
 
 
 		</div>
