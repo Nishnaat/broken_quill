@@ -103,7 +103,7 @@ function Categories({ darkMode }) {
 					filteredPosts.map(post => (
 						<li
 							key={post.slug}
-							className={`list-group-item ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
+							className={`list-group-item ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-light text-dark border-light'}`}
 						>
 							<Link
 								to={`/posts/${post.slug}`}
