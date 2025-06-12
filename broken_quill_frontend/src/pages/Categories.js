@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 function Categories() {
 	const [posts, setPosts] = useState([]);
 	const [filteredPosts, setFilteredPosts] = useState([]);
-	const [languages, setLanguages] = useState([]);
-	const [lengths, setLengths] = useState([]);
+	const [languages, setLanguages] = useState(['all']);
+	const [lengths, setLengths] = useState(['all']);
 	const [selectedLanguage, setSelectedLanguage] = useState('all');
 	const [selectedLength, setSelectedLength] = useState('all');
 
@@ -20,15 +20,22 @@ function Categories() {
 				const lengthSet = new Set();
 
 				data.forEach(post => {
-					(post.categories || []).forEach(cat => {
-						const lowerCat = cat.trim().toLowerCase();
-						if (["english", "hindi", "urdu"].includes(lowerCat)) {
-							languageSet.add(lowerCat);
-						}
-						if (["short", "medium", "long"].includes(lowerCat)) {
-							lengthSet.add(lowerCat);
+					// Categories: for language
+					const categories = Array.isArray(post.categories)
+						? post.categories.map(cat => cat.trim().toLowerCase())
+						: [];
+
+					categories.forEach(cat => {
+						if (["english", "hindi", "urdu"].includes(cat)) {
+							languageSet.add(cat);
 						}
 					});
+
+					// Length: separate field
+					const postLength = post.length?.trim().toLowerCase();
+					if (["short", "medium", "long"].includes(postLength)) {
+						lengthSet.add(postLength);
+					}
 				});
 
 				setLanguages(['all', ...Array.from(languageSet)]);
@@ -41,14 +48,17 @@ function Categories() {
 		let result = posts;
 
 		if (selectedLanguage !== 'all') {
-			result = result.filter(post =>
-				(post.categories || []).some(cat => cat.toLowerCase() === selectedLanguage)
-			);
+			result = result.filter(post => {
+				const categories = Array.isArray(post.categories)
+					? post.categories.map(cat => cat.trim().toLowerCase())
+					: [];
+				return categories.includes(selectedLanguage);
+			});
 		}
 
 		if (selectedLength !== 'all') {
 			result = result.filter(post =>
-				(post.categories || []).some(cat => cat.toLowerCase() === selectedLength)
+				post.length?.trim().toLowerCase() === selectedLength
 			);
 		}
 
@@ -63,9 +73,7 @@ function Categories() {
 				<label style={{ marginRight: '0.5rem' }}>Language:</label>
 				<select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
 					{languages.map(lang => (
-						<option key={lang} value={lang}>
-							{lang.charAt(0).toUpperCase() + lang.slice(1)}
-						</option>
+						<option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1)}</option>
 					))}
 				</select>
 			</div>
@@ -74,9 +82,7 @@ function Categories() {
 				<label style={{ marginRight: '0.5rem' }}>Length:</label>
 				<select value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)}>
 					{lengths.map(len => (
-						<option key={len} value={len}>
-							{len.charAt(0).toUpperCase() + len.slice(1)}
-						</option>
+						<option key={len} value={len}>{len.charAt(0).toUpperCase() + len.slice(1)}</option>
 					))}
 				</select>
 			</div>
