@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Categories() {
+function Categories({ darkMode }) {
 	const [posts, setPosts] = useState([]);
 	const [filteredPosts, setFilteredPosts] = useState([]);
 	const [languages, setLanguages] = useState(['all']);
@@ -101,18 +101,25 @@ function Categories() {
 			<ul className="list-group mt-4">
 				{filteredPosts.length > 0 ? (
 					filteredPosts.map(post => (
-						<li key={post.slug} className="list-group-item list-group-item-dark bg-dark text-light">
-							<Link to={`/posts/${post.slug}`} className="text-light text-decoration-none">
+						<li
+							key={post.slug}
+							className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-light' : ''}`}
+						>
+							<Link
+								to={`/posts/${post.slug}`}
+								className={`text-decoration-none ${darkMode ? 'text-light' : 'text-dark'}`}
+							>
 								{post.title}
 							</Link>
 						</li>
 					))
 				) : (
-					<li className="list-group-item list-group-item-dark bg-dark text-light">
+					<li className={`list-group-item ${darkMode ? 'list-group-item-dark bg-dark text-light' : ''}`}>
 						No posts found for selected filters.
 					</li>
 				)}
 			</ul>
+
 		</div>
 	);
 }
