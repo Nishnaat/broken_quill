@@ -98,7 +98,7 @@ function Categories({ darkMode }) {
 				</select>
 			</div>
 
-			<ul className="list-group mt-4">
+			<ul className={`list-group mt-4 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
 				{filteredPosts.length > 0 ? (
 					filteredPosts.map(post => (
 						<li
