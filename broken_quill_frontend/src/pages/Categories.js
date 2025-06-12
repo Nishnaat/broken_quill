@@ -13,7 +13,6 @@ function Categories() {
 		fetch(`${process.env.REACT_APP_API_URL}/api/posts`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("Fetched posts:", data); // ✅ DEBUG
 
 				setPosts(data);
 				setFilteredPosts(data);
@@ -27,7 +26,12 @@ function Categories() {
 						post.categories.forEach(cat => {
 							const lowerCat = cat.trim().toLowerCase();
 							if (["english", "hindi", "urdu"].includes(lowerCat)) {
-								languageSet.add(lowerCat);
+								if (["hindi", "urdu"].includes(lowerCat)) {
+									languageSet.add("hindi-urdu");
+								} 
+								else {
+									languageSet.add(lowerCat);
+								}
 							}
 						});
 					}
@@ -41,8 +45,6 @@ function Categories() {
 					}
 				});
 
-				console.log("Extracted languages:", [...languageSet]); // ✅ DEBUG
-				console.log("Extracted lengths:", [...lengthSet]);     // ✅ DEBUG
 
 				setLanguages(['all', ...Array.from(languageSet)]);
 				setLengths(['all', ...Array.from(lengthSet)]);
@@ -55,8 +57,13 @@ function Categories() {
 
 		if (selectedLanguage !== 'all') {
 			result = result.filter(post =>
-				Array.isArray(post.categories) &&
-				post.categories.some(cat => cat.trim().toLowerCase() === selectedLanguage)
+				(post.categories || []).some(cat => {
+					const lowerCat = cat.trim().toLowerCase();
+					if (selectedLanguage === 'hindi-urdu') {
+						return lowerCat === 'hindi' || lowerCat === 'urdu';
+					}
+					return lowerCat === selectedLanguage;
+				})
 			);
 		}
 
