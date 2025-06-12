@@ -13,6 +13,8 @@ function Categories() {
 		fetch(`${process.env.REACT_APP_API_URL}/api/posts`)
 			.then((res) => res.json())
 			.then((data) => {
+				console.log("Fetched posts:", data); // ✅ DEBUG
+
 				setPosts(data);
 				setFilteredPosts(data);
 
@@ -20,40 +22,42 @@ function Categories() {
 				const lengthSet = new Set();
 
 				data.forEach(post => {
-					// Categories: for language
-					const categories = Array.isArray(post.categories)
-						? post.categories.map(cat => cat.trim().toLowerCase())
-						: [];
+					// Extract from categories array
+					if (Array.isArray(post.categories)) {
+						post.categories.forEach(cat => {
+							const lowerCat = cat.trim().toLowerCase();
+							if (["english", "hindi", "urdu"].includes(lowerCat)) {
+								languageSet.add(lowerCat);
+							}
+						});
+					}
 
-					categories.forEach(cat => {
-						if (["english", "hindi", "urdu"].includes(cat)) {
-							languageSet.add(cat);
+					// Extract from separate `length` field
+					if (typeof post.length === 'string') {
+						const len = post.length.trim().toLowerCase();
+						if (["short", "medium", "long"].includes(len)) {
+							lengthSet.add(len);
 						}
-					});
-
-					// Length: separate field
-					const postLength = post.length?.trim().toLowerCase();
-					if (["short", "medium", "long"].includes(postLength)) {
-						lengthSet.add(postLength);
 					}
 				});
+
+				console.log("Extracted languages:", [...languageSet]); // ✅ DEBUG
+				console.log("Extracted lengths:", [...lengthSet]);     // ✅ DEBUG
 
 				setLanguages(['all', ...Array.from(languageSet)]);
 				setLengths(['all', ...Array.from(lengthSet)]);
 			})
-			.catch((err) => console.error(err));
+			.catch((err) => console.error("Fetch error:", err));
 	}, []);
 
 	useEffect(() => {
 		let result = posts;
 
 		if (selectedLanguage !== 'all') {
-			result = result.filter(post => {
-				const categories = Array.isArray(post.categories)
-					? post.categories.map(cat => cat.trim().toLowerCase())
-					: [];
-				return categories.includes(selectedLanguage);
-			});
+			result = result.filter(post =>
+				Array.isArray(post.categories) &&
+				post.categories.some(cat => cat.trim().toLowerCase() === selectedLanguage)
+			);
 		}
 
 		if (selectedLength !== 'all') {
