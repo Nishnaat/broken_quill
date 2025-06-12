@@ -17,13 +17,11 @@ function AllPosts() {
 			<div className="row">
 				{posts.map((post) => (
 					<div className="col-md-6 mb-4" key={post.slug}>
-						<div className="card h-100 shadow-sm">
+						<div className={`card featured-post mb-5 shadow ${darkMode ? 'custom-dark-card' : 'custom-light-card'}`}>
 							<div className="card-body">
 								<h5 className="card-title">{post.title}</h5>
-                                <p className="card-text">{post.excerpt || 'This is a featured post!'}</p>
-								<Link to={`/posts/${post.slug}`} className="btn btn-outline-primary">
-									Read More
-								</Link>
+                                <p className="card-text">{post.excerpt || 'No Excerpt'}</p>
+								<Link to={`/posts/${post.slug}`} className="read-more-btn">Read More</Link>
 							</div>
 						</div>
 					</div>

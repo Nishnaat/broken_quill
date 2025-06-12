@@ -38,7 +38,7 @@ function PostDetail() {
 			</Helmet>
 
 			<h2 className="mb-3">{post.title}</h2>
-			<div className="text-muted mb-3">{post.date}</div>
+			<div className="mb-3">{post.date}</div>
 			<hr />
 			<div dangerouslySetInnerHTML={{ __html: post.html }} />
 

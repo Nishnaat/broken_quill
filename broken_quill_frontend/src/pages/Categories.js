@@ -27,7 +27,7 @@ function Categories() {
 							const lowerCat = cat.trim().toLowerCase();
 							if (["english", "hindi", "urdu"].includes(lowerCat)) {
 								if (["hindi", "urdu"].includes(lowerCat)) {
-									languageSet.add("hindi-urdu");
+									languageSet.add("hindi/urdu");
 								} 
 								else {
 									languageSet.add(lowerCat);
@@ -59,7 +59,7 @@ function Categories() {
 			result = result.filter(post =>
 				(post.categories || []).some(cat => {
 					const lowerCat = cat.trim().toLowerCase();
-					if (selectedLanguage === 'hindi-urdu') {
+					if (selectedLanguage === 'hindi/urdu') {
 						return lowerCat === 'hindi' || lowerCat === 'urdu';
 					}
 					return lowerCat === selectedLanguage;
