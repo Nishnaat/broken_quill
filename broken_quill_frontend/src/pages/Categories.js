@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function Categories() {
 	const [posts, setPosts] = useState([]);
-	const [filteredCategories, setFilteredCategories] = useState([]);
+	const [filteredPosts, setFilteredPosts] = useState([]);
 	const [languageFilter, setLanguageFilter] = useState('all');
 	const [lengthFilter, setLengthFilter] = useState('all');
 
@@ -11,17 +11,17 @@ function Categories() {
 			.then((res) => res.json())
 			.then((data) => {
 				setPosts(data);
-				filterCategories(data, languageFilter, lengthFilter);
+				applyFilters(data, languageFilter, lengthFilter);
 			})
 			.catch((err) => console.error(err));
 	}, []);
 
 	useEffect(() => {
-		filterCategories(posts, languageFilter, lengthFilter);
+		applyFilters(posts, languageFilter, lengthFilter);
 	}, [languageFilter, lengthFilter]);
 
-	const filterCategories = (data, lang, len) => {
-		let filtered = data;
+	const applyFilters = (data, lang, len) => {
+		let filtered = [...data];
 
 		if (lang !== 'all') {
 			filtered = filtered.filter(post =>
@@ -35,18 +35,24 @@ function Categories() {
 			filtered = filtered.filter(post => post.length === len);
 		}
 
-		const uniqueCategories = [
-			...new Set(filtered.flatMap(post => post.categories || ['Uncategorized']))
-		];
-		setFilteredCategories(uniqueCategories);
+		setFilteredPosts(filtered);
 	};
+
+	// Group posts by category
+	const groupedByCategory = {};
+	filteredPosts.forEach(post => {
+		(post.categories || ['Uncategorized']).forEach(cat => {
+			if (!groupedByCategory[cat]) groupedByCategory[cat] = [];
+			groupedByCategory[cat].push(post);
+		});
+	});
 
 	return (
 		<div className="container">
 			<h2>Categories</h2>
 
-			<div className="filters mb-3">
-				<label className="me-2">
+			<div className="filters mb-4">
+				<label className="me-3">
 					Language:
 					<select
 						value={languageFilter}
@@ -59,7 +65,7 @@ function Categories() {
 					</select>
 				</label>
 
-				<label className="ms-4">
+				<label>
 					Length:
 					<select
 						value={lengthFilter}
@@ -74,13 +80,22 @@ function Categories() {
 				</label>
 			</div>
 
-			<ul className="list-group">
-				{filteredCategories.map((cat) => (
-					<li key={cat} className="list-group-item">
-						{cat}
-					</li>
-				))}
-			</ul>
+			{Object.entries(groupedByCategory).map(([category, posts]) => (
+				<div key={category} className="mb-4">
+					<h5 className="text-primary">{category}</h5>
+					<ul className="list-group">
+						{posts.map((post) => (
+							<li key={post.slug} className="list-group-item">
+								<Link to={`/post/${post.slug}`}>{post.title}</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			))}
+
+			{filteredPosts.length === 0 && (
+				<div className="alert alert-warning mt-4">No posts found with selected filters.</div>
+			)}
 		</div>
 	);
 }
