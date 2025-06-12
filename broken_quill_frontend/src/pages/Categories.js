@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 function Categories() {
 	const [posts, setPosts] = useState([]);
 	const [filteredPosts, setFilteredPosts] = useState([]);
-	const [languages, setLanguages] = useState(['all']);
-	const [lengths, setLengths] = useState(['all']);
+	const [languages, setLanguages] = useState([]);
+	const [lengths, setLengths] = useState([]);
 	const [selectedLanguage, setSelectedLanguage] = useState('all');
 	const [selectedLength, setSelectedLength] = useState('all');
 
@@ -21,30 +21,37 @@ function Categories() {
 
 				data.forEach(post => {
 					(post.categories || []).forEach(cat => {
-						const lowerCat = cat.toLowerCase();
-						if (["english", "hindi", "urdu"].includes(lowerCat)) languageSet.add(lowerCat);
-						if (["short", "medium", "long"].includes(lowerCat)) lengthSet.add(lowerCat);
+						const lowerCat = cat.trim().toLowerCase();
+						if (["english", "hindi", "urdu"].includes(lowerCat)) {
+							languageSet.add(lowerCat);
+						}
+						if (["short", "medium", "long"].includes(lowerCat)) {
+							lengthSet.add(lowerCat);
+						}
 					});
 				});
 
-				setLanguages(prev => [...prev, ...Array.from(languageSet).filter(lang => !prev.includes(lang))]);
-				setLengths(prev => [...prev, ...Array.from(lengthSet).filter(len => !prev.includes(len))]);
+				setLanguages(['all', ...Array.from(languageSet)]);
+				setLengths(['all', ...Array.from(lengthSet)]);
 			})
 			.catch((err) => console.error(err));
 	}, []);
 
 	useEffect(() => {
 		let result = posts;
+
 		if (selectedLanguage !== 'all') {
 			result = result.filter(post =>
 				(post.categories || []).some(cat => cat.toLowerCase() === selectedLanguage)
 			);
 		}
+
 		if (selectedLength !== 'all') {
 			result = result.filter(post =>
 				(post.categories || []).some(cat => cat.toLowerCase() === selectedLength)
 			);
 		}
+
 		setFilteredPosts(result);
 	}, [selectedLanguage, selectedLength, posts]);
 
@@ -56,7 +63,9 @@ function Categories() {
 				<label style={{ marginRight: '0.5rem' }}>Language:</label>
 				<select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
 					{languages.map(lang => (
-						<option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1)}</option>
+						<option key={lang} value={lang}>
+							{lang.charAt(0).toUpperCase() + lang.slice(1)}
+						</option>
 					))}
 				</select>
 			</div>
@@ -65,17 +74,23 @@ function Categories() {
 				<label style={{ marginRight: '0.5rem' }}>Length:</label>
 				<select value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)}>
 					{lengths.map(len => (
-						<option key={len} value={len}>{len.charAt(0).toUpperCase() + len.slice(1)}</option>
+						<option key={len} value={len}>
+							{len.charAt(0).toUpperCase() + len.slice(1)}
+						</option>
 					))}
 				</select>
 			</div>
 
 			<ul className="list-group mt-4">
-				{filteredPosts.map(post => (
-					<li key={post.slug} className="list-group-item">
-						<Link to={`/posts/${post.slug}`}>{post.title}</Link>
-					</li>
-				))}
+				{filteredPosts.length > 0 ? (
+					filteredPosts.map(post => (
+						<li key={post.slug} className="list-group-item">
+							<Link to={`/posts/${post.slug}`}>{post.title}</Link>
+						</li>
+					))
+				) : (
+					<li className="list-group-item">No posts found for selected filters.</li>
+				)}
 			</ul>
 		</div>
 	);
