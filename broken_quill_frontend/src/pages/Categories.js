@@ -2,76 +2,78 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Categories() {
-  const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
-  const [languageFilter, setLanguageFilter] = useState('all');
-  const [lengthFilter, setLengthFilter] = useState('all');
+	const [posts, setPosts] = useState([]);
+	const [filteredPosts, setFilteredPosts] = useState([]);
+	const [languages, setLanguages] = useState([]);
+	const [lengths, setLengths] = useState([]);
+	const [selectedLanguage, setSelectedLanguage] = useState('all');
+	const [selectedLength, setSelectedLength] = useState('all');
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/posts`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Fetched posts:', data);
-        setPosts(data);
-        setFilteredPosts(data);
-      })
-      .catch(console.error);
-  }, []);
+	useEffect(() => {
+		fetch(`${process.env.REACT_APP_API_URL}/api/posts`)
+			.then((res) => res.json())
+			.then((data) => {
+				setPosts(data);
+				setFilteredPosts(data);
 
-  useEffect(() => {
-    console.log('Applying filters:', { languageFilter, lengthFilter });
-    const filtered = posts.filter(post => {
-      const cats = Array.isArray(post.categories) ? post.categories : [];
-      const matchLang = languageFilter === 'all' || cats.includes(languageFilter);
-      const matchLen = lengthFilter === 'all' || cats.includes(lengthFilter);
-      return matchLang && matchLen;
-    });
-    console.log('Filtered posts:', filtered);
-    setFilteredPosts(filtered);
-  }, [languageFilter, lengthFilter, posts]);
+				const languageSet = new Set();
+				const lengthSet = new Set();
 
-  return (
-    <div className="container mt-4">
-      <h2>Categories</h2>
-      <div className="mb-3">
-        <label className="me-2">Language:</label>
-        <select
-          value={languageFilter}
-          onChange={e => setLanguageFilter(e.target.value)}
-          className="form-select d-inline w-auto me-3"
-        >
-          <option value="all">All</option>
-          <option value="english">English</option>
-          <option value="hindi">Hindi</option>
-          <option value="urdu">Urdu</option>
-        </select>
+				data.forEach(post => {
+					(post.categories || []).forEach(cat => {
+						if (["english", "hindi", "urdu"].includes(cat)) languageSet.add(cat);
+						if (["short", "medium", "long"].includes(cat)) lengthSet.add(cat);
+					});
+				});
 
-        <label className="me-2">Length:</label>
-        <select
-          value={lengthFilter}
-          onChange={e => setLengthFilter(e.target.value)}
-          className="form-select d-inline w-auto"
-        >
-          <option value="all">All</option>
-          <option value="short">Short</option>
-          <option value="medium">Medium</option>
-          <option value="long">Long</option>
-        </select>
-      </div>
+				setLanguages(['all', ...Array.from(languageSet)]);
+				setLengths(['all', ...Array.from(lengthSet)]);
+			})
+			.catch((err) => console.error(err));
+	}, []);
 
-      <ul className="list-group">
-        {filteredPosts.length === 0 ? (
-          <li className="list-group-item">No posts found for selected filters.</li>
-        ) : (
-          filteredPosts.map(post => (
-            <li key={post.slug} className="list-group-item">
-              <Link to={`/posts/${post.slug}`}>{post.title}</Link>
-            </li>
-          ))
-        )}
-      </ul>
-    </div>
-  );
+	useEffect(() => {
+		let result = posts;
+		if (selectedLanguage !== 'all') {
+			result = result.filter(post => post.categories?.includes(selectedLanguage));
+		}
+		if (selectedLength !== 'all') {
+			result = result.filter(post => post.categories?.includes(selectedLength));
+		}
+		setFilteredPosts(result);
+	}, [selectedLanguage, selectedLength, posts]);
+
+	return (
+		<div>
+			<h2>Categories</h2>
+
+			<div>
+				<label>Language: </label>
+				<select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
+					{languages.map(lang => (
+						<option key={lang} value={lang}>{lang}</option>
+					))}
+				</select>
+			</div>
+
+			<div>
+				<label>Length: </label>
+				<select value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)}>
+					{lengths.map(len => (
+						<option key={len} value={len}>{len}</option>
+					))}
+				</select>
+			</div>
+
+			<ul className="list-group mt-4">
+				{filteredPosts.map(post => (
+					<li key={post.slug} className="list-group-item">
+						<Link to={`/posts/${post.slug}`}>{post.title}</Link>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
 }
 
 export default Categories;
