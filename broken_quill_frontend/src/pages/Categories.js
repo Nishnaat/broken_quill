@@ -119,6 +119,8 @@ function Categories({ darkMode }) {
 					</li>
 				)}
 			</ul>
+			console.log("darkMode in Categories:", darkMode);
+
 
 		</div>
 	);
