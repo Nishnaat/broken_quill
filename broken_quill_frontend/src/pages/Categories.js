@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 function Categories() {
 	const [posts, setPosts] = useState([]);
 	const [filteredPosts, setFilteredPosts] = useState([]);
-	const [languages, setLanguages] = useState([]);
-	const [lengths, setLengths] = useState([]);
+	const [languages, setLanguages] = useState(['all']);
+	const [lengths, setLengths] = useState(['all']);
 	const [selectedLanguage, setSelectedLanguage] = useState('all');
 	const [selectedLength, setSelectedLength] = useState('all');
 
@@ -27,8 +27,8 @@ function Categories() {
 					});
 				});
 
-				setLanguages(['all', ...Array.from(languageSet)]);
-				setLengths(['all', ...Array.from(lengthSet)]);
+				setLanguages(prev => [...prev, ...Array.from(languageSet).filter(lang => !prev.includes(lang))]);
+				setLengths(prev => [...prev, ...Array.from(lengthSet).filter(len => !prev.includes(len))]);
 			})
 			.catch((err) => console.error(err));
 	}, []);
@@ -52,20 +52,20 @@ function Categories() {
 		<div>
 			<h2>Categories</h2>
 
-			<div>
-				<label>Language: </label>
+			<div style={{ marginBottom: '1rem' }}>
+				<label style={{ marginRight: '0.5rem' }}>Language:</label>
 				<select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
 					{languages.map(lang => (
-						<option key={lang} value={lang}>{lang}</option>
+						<option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1)}</option>
 					))}
 				</select>
 			</div>
 
-			<div>
-				<label>Length: </label>
+			<div style={{ marginBottom: '1rem' }}>
+				<label style={{ marginRight: '0.5rem' }}>Length:</label>
 				<select value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)}>
 					{lengths.map(len => (
-						<option key={len} value={len}>{len}</option>
+						<option key={len} value={len}>{len.charAt(0).toUpperCase() + len.slice(1)}</option>
 					))}
 				</select>
 			</div>
