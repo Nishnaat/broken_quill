@@ -21,8 +21,9 @@ function Categories() {
 
 				data.forEach(post => {
 					(post.categories || []).forEach(cat => {
-						if (["english", "hindi", "urdu"].includes(cat)) languageSet.add(cat);
-						if (["short", "medium", "long"].includes(cat)) lengthSet.add(cat);
+						const lowerCat = cat.toLowerCase();
+						if (["english", "hindi", "urdu"].includes(lowerCat)) languageSet.add(lowerCat);
+						if (["short", "medium", "long"].includes(lowerCat)) lengthSet.add(lowerCat);
 					});
 				});
 
@@ -35,10 +36,14 @@ function Categories() {
 	useEffect(() => {
 		let result = posts;
 		if (selectedLanguage !== 'all') {
-			result = result.filter(post => post.categories?.includes(selectedLanguage));
+			result = result.filter(post =>
+				(post.categories || []).some(cat => cat.toLowerCase() === selectedLanguage)
+			);
 		}
 		if (selectedLength !== 'all') {
-			result = result.filter(post => post.categories?.includes(selectedLength));
+			result = result.filter(post =>
+				(post.categories || []).some(cat => cat.toLowerCase() === selectedLength)
+			);
 		}
 		setFilteredPosts(result);
 	}, [selectedLanguage, selectedLength, posts]);
