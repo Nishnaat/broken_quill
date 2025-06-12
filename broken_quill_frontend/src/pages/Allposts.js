@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function AllPosts() {
+function AllPosts({ darkMode }) {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
