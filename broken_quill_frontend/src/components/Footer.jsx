@@ -1,10 +1,24 @@
 // src/components/Footer.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = ({ darkMode }) => {
 	const footerClass = darkMode ? 'footer-dark' : 'footer-light';
+
+	useEffect(() => {
+		const script = document.createElement('script');
+		script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1584144256760502';
+		script.async = true;
+		script.crossOrigin = 'anonymous';
+		document.body.appendChild(script);
+
+		try {
+			(window.adsbygoogle = window.adsbygoogle || []).push({});
+		} catch (e) {
+			console.error('AdSense error:', e);
+		}
+	}, []);
 
 	return (
 		<footer className={`mt-5 py-4 text-center border-top ${footerClass}`}>
@@ -29,8 +43,16 @@ const Footer = ({ darkMode }) => {
 				</a>
 			</div>
 
+			{/* 🔸 Google AdSense Ad */}
+			<ins className="adsbygoogle"
+				style={{ display: 'block', margin: '20px auto' }}
+				data-ad-client="ca-pub-1584144256760502"
+				data-ad-slot="6050255608"
+				data-ad-format="auto"
+				data-full-width-responsive="true"></ins>
+
 			<p style={styles.credits}>
-				© 2025 Broken Quill. All rights reserved.<br />
+				© 2025 Naked Metaphor. All rights reserved.<br />
 				Made with ❤️
 			</p>
 		</footer>
@@ -55,6 +77,7 @@ const styles = {
 	credits: {
 		fontStyle: 'italic',
 		opacity: 0.8,
+		marginTop: '1rem',
 	},
 };
 
