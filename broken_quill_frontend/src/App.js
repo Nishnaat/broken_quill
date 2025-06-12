@@ -14,14 +14,14 @@ function App() {
 	return (
 		<Router>
 			<>
-				<Header />
-				<div className="container mt-4">
+				<Header darkMode={darkMode} setDarkMode={setDarkMode} />
+				<div className="container mt-4 ${darkMode ? 'bg-dark text-light' : ''}">
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/posts/:slug" element={<PostDetail />} />
-						<Route path="/contact" element={<Contact />} />
-						<Route path="/posts" element={<Allposts />} />
-						<Route path="/categories" element={<Categories />} />
+						<Route path="/posts/:slug" element={<PostDetail d />} />
+						<Route path="/contact" element={<Contact darkMode={darkMode} />} />
+						<Route path="/posts" element={<Allposts darkMode={darkMode} />} />
+						<Route path="/categories" element={<Categories darkMode={darkMode} />} />
 					</Routes>
 				</div>
 				<Footer darkMode={darkMode} />
