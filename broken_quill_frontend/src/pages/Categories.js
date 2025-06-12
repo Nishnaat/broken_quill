@@ -101,12 +101,16 @@ function Categories() {
 			<ul className="list-group mt-4">
 				{filteredPosts.length > 0 ? (
 					filteredPosts.map(post => (
-						<li key={post.slug} className="list-group-item">
-							<Link to={`/posts/${post.slug}`}>{post.title}</Link>
+						<li key={post.slug} className="list-group-item list-group-item-dark bg-dark text-light">
+							<Link to={`/posts/${post.slug}`} className="text-light text-decoration-none">
+								{post.title}
+							</Link>
 						</li>
 					))
 				) : (
-					<li className="list-group-item">No posts found for selected filters.</li>
+					<li className="list-group-item list-group-item-dark bg-dark text-light">
+						No posts found for selected filters.
+					</li>
 				)}
 			</ul>
 		</div>
