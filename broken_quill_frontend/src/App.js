@@ -11,14 +11,17 @@ import Footer from './components/Footer';
 
 function App() {
 	const [darkMode, setDarkMode] = useState(false);
+	useEffect(() => {
+		document.body.className = darkMode ? 'bg-dark text-white' : 'bg-white text-dark';
+	}, [darkMode]);
 	return (
 		<Router>
 			<>
 				<Header darkMode={darkMode} setDarkMode={setDarkMode} />
-				<div className={`container mt-4 ${darkMode ? 'bg-dark text-light' : ''}`}>
+				<div className={`container mt-4 ${darkMode ? 'bg-dark text-light' : 'bg-white text-dark'}`}>
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="/posts/:slug" element={<PostDetail d />} />
+						<Route path="/posts/:slug" element={<PostDetail darkMode={darkMode} />} />
 						<Route path="/contact" element={<Contact darkMode={darkMode} />} />
 						<Route path="/posts" element={<Allposts darkMode={darkMode} />} />
 						<Route path="/categories" element={<Categories darkMode={darkMode} />} />
