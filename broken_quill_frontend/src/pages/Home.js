@@ -34,7 +34,7 @@ function Home({ darkMode }) {
 			<div className="row">
 				{posts.slice(1).map(post => (
 					<div className="col-md-6 mb-4" key={post.slug}>
-<div className={`card featured-post mb-5 shadow ${darkMode ? 'custom-dark-card' : 'custom-light-card'}`}>
+						<div className={`card featured-post mb-5 shadow ${darkMode ? 'custom-dark-card' : 'custom-light-card'}`}>
 							<div className="card-body">
 								<h5 className="card-title">{post.title}</h5>
 								<p className="card-text">{post.excerpt || 'This is a featured post!'}</p>
