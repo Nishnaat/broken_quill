@@ -3,6 +3,8 @@ title: The Despair Inside
 slug: the-despair-inside
 date: 2025-06-10
 excerpt: The misery inside has baffled me, Should I change myself or just let it be
+category: ["english", "poem"]
+length: medium
 ---
 
 The despair inside has embezzled from me  

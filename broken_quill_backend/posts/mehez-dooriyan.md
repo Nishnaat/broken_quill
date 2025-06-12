@@ -2,7 +2,9 @@
 title: Dooriyan
 slug: mehez-dooriyan
 date: 2025-06-10
-excerpt: Mehez dooriyāṅ hī to haiṅ  
+excerpt: Mehez dooriyāṅ hī to haiṅ
+category: ["urdu", "hindi", "shayari"]
+length: short
 ---
 
 Mehez dooriyāṅ hī to haiṅ  
