@@ -12,91 +12,68 @@ function Categories() {
 			.then((res) => res.json())
 			.then((data) => {
 				setPosts(data);
-				applyFilters(data, languageFilter, lengthFilter);
+				setFilteredPosts(data);
 			})
 			.catch((err) => console.error(err));
 	}, []);
 
 	useEffect(() => {
-		applyFilters(posts, languageFilter, lengthFilter);
-	}, [languageFilter, lengthFilter]);
+		let filtered = posts;
 
-	const applyFilters = (data, lang, len) => {
-		let filtered = [...data];
-
-		if (lang !== 'all') {
+		if (languageFilter !== 'all') {
 			filtered = filtered.filter(post =>
-				lang === 'english'
-					? post.categories?.includes('english')
-					: post.categories?.some(c => c === 'hindi' || c === 'urdu')
+				Array.isArray(post.categories) &&
+				post.categories.includes(languageFilter)
 			);
 		}
 
-		if (len !== 'all') {
-			filtered = filtered.filter(post => post.length === len);
+		if (lengthFilter !== 'all') {
+			filtered = filtered.filter(post =>
+				Array.isArray(post.categories) &&
+				post.categories.includes(lengthFilter)
+			);
 		}
 
 		setFilteredPosts(filtered);
-	};
+	}, [languageFilter, lengthFilter, posts]);
 
-	// Group posts by category
-	const groupedByCategory = {};
-	filteredPosts.forEach(post => {
-		(post.categories || ['Uncategorized']).forEach(cat => {
-			if (!groupedByCategory[cat]) groupedByCategory[cat] = [];
-			groupedByCategory[cat].push(post);
-		});
-	});
+	const handleLanguageChange = (e) => setLanguageFilter(e.target.value);
+	const handleLengthChange = (e) => setLengthFilter(e.target.value);
+
+	const languages = ['all', 'english', 'hindi', 'urdu'];
+	const lengths = ['all', 'short', 'medium', 'long'];
 
 	return (
 		<div className="container">
-			<h2>Categories</h2>
+			<h2 className="my-3">Categories</h2>
 
-			<div className="filters mb-4">
-				<label className="me-3">
-					Language:
-					<select
-						value={languageFilter}
-						onChange={(e) => setLanguageFilter(e.target.value)}
-						className="form-select d-inline-block w-auto ms-2"
-					>
-						<option value="all">All</option>
-						<option value="english">English</option>
-						<option value="hindi/urdu">Hindi/Urdu</option>
-					</select>
-				</label>
+			<div className="mb-3">
+				<label className="form-label me-2">Language:</label>
+				<select value={languageFilter} onChange={handleLanguageChange} className="form-select d-inline w-auto me-3">
+					{languages.map(lang => (
+						<option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1)}</option>
+					))}
+				</select>
 
-				<label>
-					Length:
-					<select
-						value={lengthFilter}
-						onChange={(e) => setLengthFilter(e.target.value)}
-						className="form-select d-inline-block w-auto ms-2"
-					>
-						<option value="all">All</option>
-						<option value="short">Short</option>
-						<option value="medium">Medium</option>
-						<option value="long">Long</option>
-					</select>
-				</label>
+				<label className="form-label me-2">Length:</label>
+				<select value={lengthFilter} onChange={handleLengthChange} className="form-select d-inline w-auto">
+					{lengths.map(len => (
+						<option key={len} value={len}>{len.charAt(0).toUpperCase() + len.slice(1)}</option>
+					))}
+				</select>
 			</div>
 
-			{Object.entries(groupedByCategory).map(([category, posts]) => (
-				<div key={category} className="mb-4">
-					<h5 className="text-primary">{category}</h5>
-					<ul className="list-group">
-						{posts.map((post) => (
-							<li key={post.slug} className="list-group-item">
-								<Link to={`/post/${post.slug}`}>{post.title}</Link>
-							</li>
-						))}
-					</ul>
-				</div>
-			))}
-
-			{filteredPosts.length === 0 && (
-				<div className="alert alert-warning mt-4">No posts found with selected filters.</div>
-			)}
+			<ul className="list-group">
+				{filteredPosts.length === 0 ? (
+					<li className="list-group-item">No posts found for selected filters.</li>
+				) : (
+					filteredPosts.map(post => (
+						<li key={post.slug} className="list-group-item">
+							<Link to={`/posts/${post.slug}`}>{post.title}</Link>
+						</li>
+					))
+				)}
+			</ul>
 		</div>
 	);
 }
