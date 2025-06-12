@@ -15,7 +15,7 @@ function App() {
 		<Router>
 			<>
 				<Header darkMode={darkMode} setDarkMode={setDarkMode} />
-				<div className="container mt-4 ${darkMode ? 'bg-dark text-light' : ''}">
+				<div className={`container mt-4 ${darkMode ? 'bg-dark text-light' : ''}`}>
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/posts/:slug" element={<PostDetail d />} />

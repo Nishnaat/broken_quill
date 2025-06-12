@@ -13,7 +13,6 @@ function Categories({ darkMode }) {
 		fetch(`${process.env.REACT_APP_API_URL}/api/posts`)
 			.then((res) => res.json())
 			.then((data) => {
-
 				setPosts(data);
 				setFilteredPosts(data);
 
@@ -21,22 +20,18 @@ function Categories({ darkMode }) {
 				const lengthSet = new Set();
 
 				data.forEach(post => {
-					// Extract from categories array
 					if (Array.isArray(post.categories)) {
 						post.categories.forEach(cat => {
 							const lowerCat = cat.trim().toLowerCase();
 							if (["english", "hindi", "urdu"].includes(lowerCat)) {
 								if (["hindi", "urdu"].includes(lowerCat)) {
 									languageSet.add("hindi/urdu");
-								} 
-								else {
+								} else {
 									languageSet.add(lowerCat);
 								}
 							}
 						});
 					}
-
-					// Extract from separate `length` field
 					if (typeof post.length === 'string') {
 						const len = post.length.trim().toLowerCase();
 						if (["short", "medium", "long"].includes(len)) {
@@ -44,7 +39,6 @@ function Categories({ darkMode }) {
 						}
 					}
 				});
-
 
 				setLanguages(['all', ...Array.from(languageSet)]);
 				setLengths(['all', ...Array.from(lengthSet)]);
@@ -77,33 +71,45 @@ function Categories({ darkMode }) {
 	}, [selectedLanguage, selectedLength, posts]);
 
 	return (
-		<div>
-			<h2>Categories</h2>
+		<div className={`p-4 min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
+			<h2 className="mb-4">Categories</h2>
 
-			<div style={{ marginBottom: '1rem' }}>
-				<label style={{ marginRight: '0.5rem' }}>Language:</label>
-				<select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
+			<div className="mb-3">
+				<label className="form-label me-2">Language:</label>
+				<select
+					className={`form-select w-auto d-inline-block ${darkMode ? 'bg-dark text-white border-light' : ''}`}
+					value={selectedLanguage}
+					onChange={(e) => setSelectedLanguage(e.target.value)}
+				>
 					{languages.map(lang => (
-						<option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1)}</option>
+						<option key={lang} value={lang}>
+							{lang.charAt(0).toUpperCase() + lang.slice(1)}
+						</option>
 					))}
 				</select>
 			</div>
 
-			<div style={{ marginBottom: '1rem' }}>
-				<label style={{ marginRight: '0.5rem' }}>Length:</label>
-				<select value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)}>
+			<div className="mb-4">
+				<label className="form-label me-2">Length:</label>
+				<select
+					className={`form-select w-auto d-inline-block ${darkMode ? 'bg-dark text-white border-light' : ''}`}
+					value={selectedLength}
+					onChange={(e) => setSelectedLength(e.target.value)}
+				>
 					{lengths.map(len => (
-						<option key={len} value={len}>{len.charAt(0).toUpperCase() + len.slice(1)}</option>
+						<option key={len} value={len}>
+							{len.charAt(0).toUpperCase() + len.slice(1)}
+						</option>
 					))}
 				</select>
 			</div>
 
-			<ul className={`list-group mt-4 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
+			<ul className="list-group">
 				{filteredPosts.length > 0 ? (
 					filteredPosts.map(post => (
 						<li
 							key={post.slug}
-							className={`list-group-item ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}
+							className={`list-group-item ${darkMode ? 'bg-dark text-white border-secondary' : ''}`}
 						>
 							<Link
 								to={`/posts/${post.slug}`}
@@ -114,14 +120,11 @@ function Categories({ darkMode }) {
 						</li>
 					))
 				) : (
-					
-					<li className={`list-group-item ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}`}>
+					<li className={`list-group-item ${darkMode ? 'bg-dark text-white border-secondary' : ''}`}>
 						No posts found for selected filters.
 					</li>
 				)}
 			</ul>
-
-
 		</div>
 	);
 }
