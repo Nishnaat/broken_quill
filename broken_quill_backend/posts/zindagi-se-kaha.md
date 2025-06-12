@@ -3,7 +3,7 @@ title: ज़िंदगी से कह दिया है
 slug: zindagi-se-kaha
 date: 2025-06-10
 excerpt: Zindagī se kah diyā hai, terī fazūliyat bhī ab hamen manzūr hai 
-category: ["urdu", "hindi", "shayari"]
+categories: ["urdu", "hindi", "shayari"]
 length: medium
 ---
 

@@ -3,7 +3,7 @@ title: हसरतों का बोझ
 slug: hasraton-ka-bojh
 date: 2025-06-12
 excerpt: Hamārī hasraton kā bojh to dekhiye janāb 
-category: ["urdu", "hindi", "shayari"]
+categories: ["urdu", "hindi", "shayari"]
 length: short
 ---
 

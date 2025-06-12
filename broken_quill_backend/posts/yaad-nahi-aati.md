@@ -3,7 +3,7 @@ title: यूं तो आती नहीं याद हमें
 slug: yaad-nahi-aati
 date: 2025-06-12
 excerpt: is jām se kyā kahēn 
-category: ["shayari", "urdu", "hindi"]
+categories: ["shayari", "urdu", "hindi"]
 length: short
 ---
 

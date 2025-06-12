@@ -3,6 +3,7 @@ title: Bita hua har lamha
 slug: dil-e-nakaam-ki-khataen
 date: 2025-06-12
 excerpt: Mauzūdā waqt to na jāne kahīn kho sā gayā hai
+categories: ["urdu", "hindi" , "shayari"]
 length: short
 ---
 

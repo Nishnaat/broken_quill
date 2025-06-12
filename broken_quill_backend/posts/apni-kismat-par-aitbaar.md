@@ -3,7 +3,7 @@ title: Apnī kismat par aitbār nahīñ hotā
 slug: apni-kismat-par-aitbaar
 date: 2025-06-12
 excerpt: Jinkī nas nas se wāqif the kabhī
-category: ["shayari","urdu","hindi"]
+categories: ["shayari","urdu","hindi"]
 length: short
 ---
 
