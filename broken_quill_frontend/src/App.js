@@ -11,9 +11,6 @@ import Footer from './components/Footer';
 
 function App() {
 	const [darkMode, setDarkMode] = useState(false);
-	useEffect(() => {
-		document.body.className = darkMode ? 'bg-dark text-white' : 'bg-white text-dark';
-	}, [darkMode]);
 	return (
 		<Router>
 			<>
