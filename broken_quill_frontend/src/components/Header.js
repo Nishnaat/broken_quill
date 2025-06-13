@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 
 function Header({ darkMode, setDarkMode }) {
+	const location = useLocation();
 	useEffect(() => {
 		if (darkMode) {
 			document.body.classList.add('bg-dark', 'text-white');
@@ -13,46 +15,40 @@ function Header({ darkMode, setDarkMode }) {
 	}, [darkMode]);
 
 	return (
-		<nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
+		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<div className="container">
 				<Link className="navbar-brand" to="/">Broken Quill</Link>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarNav"
-					aria-controls="navbarNav"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span className="navbar-toggler-icon"></span>
-				</button>
-				<div className="collapse navbar-collapse" id="navbarNav">
+				<div className="collapse navbar-collapse">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<Link className="nav-link" to="/">Home</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/contact">Contact</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/posts">All Posts</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/categories">Categories</Link>
-						</li>
-						<li className="nav-item">
-							<button
-								onClick={() => setDarkMode(!darkMode)}
-								className={`btn btn-sm ${darkMode ? 'btn-outline-light' : 'btn-outline-dark'} ms-3`}
+							<Link
+								to="/"
+								className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
 							>
-								{darkMode ? '☀️ Light' : '🌙 Dark'}
-							</button>
+								Home
+							</Link>
+						</li>
+						<li className="nav-item">
+							<Link
+								to="/categories"
+								className={`nav-link ${location.pathname === '/categories' ? 'active' : ''}`}
+							>
+								Categories
+							</Link>
+						</li>
+						<li className="nav-item">
+							<Link
+								to="/contact"
+								className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}
+							>
+								Contact
+							</Link>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
+
 	);
 }
 

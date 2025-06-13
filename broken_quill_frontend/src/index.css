@@ -20,11 +20,23 @@ h1, h2, h3, h4, h5, h6,
 	font-size: 1.05rem;
 }
 
+.nav-link.active {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+body.bg-light .nav-link.active {
+	color: #000 !important;
+}
+
+body.bg-dark .nav-link.active {
+	color: #fff !important;
+}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* Light Theme */
 body.bg-light {
 	background-color: #fdfaf6;
 	color: #2e2e2e;
