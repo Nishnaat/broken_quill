@@ -78,7 +78,7 @@ function Categories({ darkMode }) {
 
 	return (
 		<div>
-			<h2>Categories</h2>
+			<h2 className="mb-4" style={{ fontSize: '2rem', fontWeight: '600' }}>Categories</h2>
 
 			<div style={{ marginBottom: '1rem' }}>
 				<label style={{ marginRight: '0.5rem' }}>Language:</label>

@@ -14,6 +14,12 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 500;
 }
 
+.navbar-nav .nav-link {
+	padding: 0.5rem 1rem;
+	margin-right: 1rem;
+	font-size: 1.05rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -25,8 +31,8 @@ body.bg-light {
 }
 
 body.bg-dark {
-	background-color: #121212 !important;
-	color: white;
+	background-color: #1a1a1a !important;
+	color: #e1e1e1;
 }
 
 a, a.nav-link {
@@ -47,16 +53,18 @@ body.bg-dark .featured-post {
 	color: #ffffff;
 }
 footer {
-	background-color: #f8f9fa; /* default light */
-	color: #212529;
+	font-size: 0.9rem;
+	text-align: center;
+	padding: 1.5rem 0;
+	background-color: #f8f8f8;
+	color: #777;
 	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.bg-dark footer {
-	background-color: #1a1a1a;
-	color: #f1f1f1;
+	background-color: #121212;
+	color: #bbb;
 }
-
 /* Elegant Light Theme Enhancements */
 .navbar-light.bg-light {
 	background-color: #f2efe9 !important; /* Muted tone */
@@ -89,13 +97,12 @@ body.bg-dark footer {
 	background-color: #121212 !important;
 }
 
-.navbar-dark .nav-link,
-.navbar-dark .navbar-brand {
-	color: #f1f1f1 !important;
+.navbar-dark .nav-link {
+	color: #cccccc !important;
 }
 
 .navbar-dark .nav-link:hover {
-	color: #00bcd4 !important;
+	color: #ffffff !important;
 }
 
 /* Footer Light Theme */
@@ -162,4 +169,24 @@ body.bg-dark .read-more-btn:hover {
 	background-color: #66b2ff;
 	color: #000;
 }
+
+.list-group-item {
+	padding: 1.2rem 1.5rem;
+	margin-bottom: 0.7rem;
+	border-radius: 10px;
+}
+
+blockquote {
+	border-left: 4px solid #ccc;
+	margin: 1.5rem 0;
+	padding-left: 1rem;
+	font-style: italic;
+	color: #555;
+}
+
+body.bg-dark blockquote {
+	border-left-color: #777;
+	color: #ccc;
+}
+
 
