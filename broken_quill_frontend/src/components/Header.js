@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
-	const [darkMode, setDarkMode] = useState(false);
-
+function Header({ darkMode, setDarkMode }) {
 	useEffect(() => {
 		if (darkMode) {
 			document.body.classList.add('bg-dark', 'text-white');
@@ -17,9 +15,7 @@ function Header() {
 	return (
 		<nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
 			<div className="container">
-				<Link className="navbar-brand" to="/">
-					Broken Quill
-				</Link>
+				<Link className="navbar-brand" to="/">Broken Quill</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
