@@ -5,9 +5,10 @@ date: 2025-06-12
 excerpt: Every ounce of reverence turned into disdain
 categories: ["poem", "english"]
 length: short
+type: poem
 ---
 
 Every ounce of reverence turned into disdain  
 Every meticulous detail blurred into pain  
 Every sense of serendipity shattered to bane  
-Every alteration made now seems mere stain
+Every alteration made now seems mere stain  

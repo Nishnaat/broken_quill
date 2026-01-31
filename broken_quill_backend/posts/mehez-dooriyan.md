@@ -5,6 +5,7 @@ date: 2025-06-10
 excerpt: Mehez dooriyāṅ hī to haiṅ
 categories: ["urdu", "hindi", "shayari"]
 length: short
+type: fragment
 ---
 
 Mehez dooriyāṅ hī to haiṅ  
@@ -13,6 +14,8 @@ Kuch nazdeek ham bhī āte haiṅ
 
 ---
 
+:::devanagari
 महज़ दूरियाँ ही तो हैं  
 कुछ क़दम तुम बढ़ाओ  
-कुछ नज़दीक हम भी आते हैं
+कुछ नज़दीक हम भी आते हैं  
+:::

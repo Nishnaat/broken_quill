@@ -1,4 +1,5 @@
 import os
+import re
 import frontmatter
 import markdown
 from datetime import date, datetime
@@ -48,7 +49,14 @@ def load_post_content(slug):
 					else:
 						post_date = str(post_date)
 
-					html_content = markdown.markdown(post.content)
+					processed_content = preprocess_dev_blocks(post.content)
+
+					html_content = markdown.markdown(
+						processed_content,
+						extensions=["extra"]
+					)
+
+
 
 					return {
 						'title': post.get('title'),
@@ -61,3 +69,20 @@ def load_post_content(slug):
 
 
 	return None
+
+
+
+def preprocess_dev_blocks(text):
+    def replacer(match):
+        content = match.group(1).strip()
+        content = content.replace('\n', '<br>\n')
+        return f'<div class="lang-devanagari">{content}</div>'
+
+    return re.sub(
+        r':::devanagari\s*(.*?)\s*:::',
+        replacer,
+        text,
+        flags=re.DOTALL
+    )
+
+

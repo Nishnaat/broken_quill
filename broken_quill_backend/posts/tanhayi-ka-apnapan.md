@@ -5,6 +5,7 @@ date: 2025-06-12
 excerpt: Tanhā’ī kī sargoshī meñ ab apnapan sā lagtā hai
 categories: ["shayari", "urdu", "hindi"]
 length: medium
+type: poem
 ---
 
 Tanhā’ī kī sargoshī meñ ab apnapan sā lagtā hai  
@@ -14,7 +15,9 @@ Jinke āne bhar kī thī hasrat, ab unka rukhsat honā bhī ek khwāb sā lagtā
 
 ---
 
+:::devanagari
 तन्हाई की सरगोशी में अब अपनापन सा लगता है  
 बयां करने को हैं लफ़्ज़ हज़ार पर अब ख़ामोश रहना अच्छा लगता है  
-सोचा गलतियाँ न होंगी दुबारा अब, पर बिना ख़ता किये ये दिल भी कहां लगता है  
-जिनके आने भर की थी हसरत, अब उनका रुख़्सत होना भी एक ख़्वाब सा लगता है
+सोचा गलतियाँ न होंगी दुबारा अब, पर बिना ख़ता किये ये दिल भी कहाँ लगता है  
+जिनके आने भर की थी हसरत, अब उनका रुख़्सत होना भी एक ख़्वाब सा लगता है  
+:::

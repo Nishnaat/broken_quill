@@ -205,12 +205,36 @@ body.bg-dark blockquote {
    Writing Content
    ================================ */
 
+/* English / Roman / Urdu (translit) */
 .post-content {
-	max-width: 680px;
-	margin: 2.5rem auto;
-	line-height: 1.85;
-	font-size: 1.05rem;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.9rem;
+  line-height: 1.9;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: #080808;
 }
+
+
+.post-content p,
+.lang-devanagari p {
+  margin-bottom: 1.35rem;
+}
+
+
+/* Hindi / Devanagari */
+.lang-devanagari {
+  font-family: 'Hind', sans-serif;
+  font-size: 1rem;
+  line-height: 1.9;
+  font-weight:1500;
+  letter-spacing: 0.02em;
+}
+
+
+
+
+
 
 /* Poems (default) */
 .post-poem p {
@@ -224,9 +248,6 @@ body.bg-dark blockquote {
 }
 
 /* Fragments */
-.post-fragment {
-	opacity: 0.82;
-}
 
 .post-fragment p {
 	margin-bottom: 1.4rem;
