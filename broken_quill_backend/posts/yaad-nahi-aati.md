@@ -5,6 +5,8 @@ date: 2025-06-12
 excerpt: is jām se kyā kahēn 
 categories: ["shayari", "urdu", "hindi"]
 length: short
+type: fragment
+
 ---
 
 Yūn to āti nahīn yād hamēn  

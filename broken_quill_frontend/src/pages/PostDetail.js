@@ -40,14 +40,24 @@ function PostDetail() {
 			<h2 className="mb-3">{post.title}</h2>
 			<div className="mb-3">{post.date}</div>
 			<hr />
-			<div dangerouslySetInnerHTML={{ __html: post.html }} />
+
+			<div
+				className={`post-content post-${post.type || "poem"}`}
+				dangerouslySetInnerHTML={{ __html: post.html }}
+			/>
 
 			<div className="mt-5">
 				<h5>Share this post:</h5>
 				<div className="d-flex gap-3 align-items-center">
-					<FacebookShareButton url={shareUrl}><FacebookIcon size={32} round /></FacebookShareButton>
-					<TwitterShareButton url={shareUrl}><TwitterIcon size={32} round /></TwitterShareButton>
-					<WhatsappShareButton url={shareUrl}><WhatsappIcon size={32} round /></WhatsappShareButton>
+					<FacebookShareButton url={shareUrl}>
+						<FacebookIcon size={32} round />
+					</FacebookShareButton>
+					<TwitterShareButton url={shareUrl}>
+						<TwitterIcon size={32} round />
+					</TwitterShareButton>
+					<WhatsappShareButton url={shareUrl}>
+						<WhatsappIcon size={32} round />
+					</WhatsappShareButton>
 					<button
 						className="btn btn-sm btn-outline-secondary"
 						onClick={() => navigator.clipboard.writeText(shareUrl)}

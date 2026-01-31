@@ -5,6 +5,7 @@ date: 2025-06-10
 excerpt: The misery inside has baffled me, Should I change myself or just let it be
 categories: ["english", "poem"]
 length: medium
+type: poem
 ---
 
 The despair inside has embezzled from me  
