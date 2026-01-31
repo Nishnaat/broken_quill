@@ -25,8 +25,9 @@ def load_post_list():
 					'slug': post.get('slug'),
 					'date': post_date,
 					'excerpt': post.get('excerpt'),
-					'categories': post.get('categories'),
-					'length':post.get('length')
+					'categories': post.get('categories', []),
+					'length': post.get('length'),
+					'type': post.get('type', 'poem')
 				})
 
 	# Sort posts by date descending
@@ -54,7 +55,9 @@ def load_post_content(slug):
 						'slug': post.get('slug'),
 						'date': post_date,
 						'excerpt': post.get('excerpt'),
+						'type': post.get('type', 'poem'),
 						'html': html_content,
 					}
+
 
 	return None
