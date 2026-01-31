@@ -5,6 +5,7 @@ date: 2025-06-13
 excerpt: Aaj phir dil wahīn le āyā, baithī hai jahān tanhā’ī
 categories: ["shayari", "hindi", "urdu"]
 length: long
+type: poem
 ---
 
 Aaj phir dil wahīn le āyā, baithī hai jahān tanhā’ī  
@@ -24,6 +25,7 @@ Jā chukā wo shakhs kabkā, reh gayī us tasvīr kī parchā’ī
 
 ---
 
+:::devanagari
 आज फिर दिल वहीं ले आया, बैठी है जहाँ तन्हाई  
 हैं तो लोगों की भीड़ में पर आँख न जाने क्यों भर आई  
 सोचा कहीं और दिल लगा के देखें, पर इस दिल से एक आवाज़ आई  
@@ -36,5 +38,6 @@ Jā chukā wo shakhs kabkā, reh gayī us tasvīr kī parchā’ī
 
 इस पत्थर दिल में भी थी जिसकी रूह समाई  
 तुझे पता है वो शख्सियत थी कहाँ से आई  
-फना होने को तैयार था तू जिस पर, थी तूने उसकी एक तस्वीर बनायी  
+फना होने को तैयार था तू जिस पर, थी तूने उसकी एक तस्वीर बनाई  
 जा चुका वो शख्स कबका, रह गई उस तस्वीर की परछाई  
+:::

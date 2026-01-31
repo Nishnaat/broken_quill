@@ -21,4 +21,4 @@ Like an empty shell drenched in remorse
 The misery inside has baffled me  
 Should I change myself or just let it be  
 Cold-hearted, concealed in disguise  
-Broke free, as tears rolled down the eyes
+Broke free, as tears rolled down the eyes  
